@@ -1,0 +1,44 @@
+spring.jmx:
+   enabled: false
+
+spring.datasource:
+    driverClassName: org.h2.Driver
+    url: jdbc:h2:mem:bootexample;MODE=MySQL
+
+server:
+  port: 8090
+
+#todo: make sure to always enable security in production
+security:
+  basic:
+    enabled: false
+
+#management endpoints on a separate port
+management:
+  port: 8091
+  security:
+    enabled: false # management port is internal only. no need to secure it.
+
+#default project info followed by actual injected pom-specified values.
+project:
+  name: hosep-sample-application
+  version: 0.1
+  description: This is a sample application to be used in a CI/CD pipeline
+info:
+  build:
+    artifact: ${project.artifactId}
+    name: ${project.name}
+    description: ${project.description}
+    version: ${project.version}
+
+user.service:
+  name: 'default profile:'
+---
+spring:
+  profiles: test
+
+spring.jpa:
+    hibernate.ddl-auto: create-drop
+
+#hotel.service:
+# name: 'test profile
